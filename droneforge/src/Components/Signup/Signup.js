@@ -20,6 +20,9 @@ function Signup() {
     setPassword(e.target.value);
   };
 
+  // The frontend sends a registration request to the backend.
+  // Upon successful registration, the backend responds with a token.
+  // The frontend extracts the token from the response data and stores it in the browser's localStorage for future use.
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -31,7 +34,9 @@ function Signup() {
         body: JSON.stringify({ username, email, password }),
       });
       if (response.ok) {
-        // User registered successfully, redirect to login page or perform desired action
+        const data = await response.json();
+        // Store the token in localStorage
+        localStorage.setItem('token', data.token);
         console.log('Registration successful');
         setError('');
       } else {
