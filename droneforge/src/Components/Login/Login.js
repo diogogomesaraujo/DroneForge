@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+  
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -16,9 +18,35 @@ function Login() {
     setPassword(e.target.value);
   };
 
-
+  // Handle login form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const response = await fetch('http://localhost:8080/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        // User logged in successfully, extract token from response
+        const data = await response.json();
+        const token = data.token;
+        // Store token securely
+        localStorage.setItem('token', token);
+        // Redirect to homepage
+        navigate('/');
+      } else {
+        // Handle login failure
+        console.error('Login failed:', response.statusText);
+        setError('Invalid email or password');
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error('An error occurred during login:', error);
+      setError('An error occurred during login');
+    }
   };
 
   return (
