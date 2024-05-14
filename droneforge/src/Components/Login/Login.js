@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import lottie from 'lottie-web';
 import './Login.css';
 
 function Login() {
@@ -8,8 +9,9 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const animationContainer = useRef(null);
+  const animationInstance = useRef(null);
   
-
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -18,6 +20,38 @@ function Login() {
     setPassword(e.target.value);
   };
 
+  useEffect(() => {
+    const loadAnimation = async () => {
+      try {
+        const response = await fetch('https://lottie.host/e6f0719e-2a73-425e-bb2a-060e348b2ebb/l3tqaZFSSh.json');
+        const data = await response.json();
+
+        if (animationInstance.current) {
+          animationInstance.current.destroy(); // Clean up the previous instance if it exists
+        }
+
+        animationInstance.current = lottie.loadAnimation({
+          container: animationContainer.current, // the container element
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: data, // the animation data
+        });
+      } catch (error) {
+        console.error('Failed to load animation data:', error);
+      }
+    };
+
+    loadAnimation();
+
+    // Cleanup function to destroy Lottie instance when component unmounts or re-renders
+    return () => {
+      if (animationInstance.current) {
+        animationInstance.current.destroy();
+      }
+    };
+  }, []); // Empty dependency array ensures this effect runs only once
+  
   // Handle login form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,7 +70,7 @@ function Login() {
         // Store token securely
         localStorage.setItem('token', token);
         // Redirect to homepage
-        navigate('/');
+        navigate('/main');
       } else {
         // Handle login failure
         console.error('Login failed:', response.statusText);
@@ -50,45 +84,31 @@ function Login() {
   };
 
   return (
-    <Container>
-      <div className="form-container">
-        <div className="form-column">
-          <h2>Login</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit} id="login-form">
+    <div className="login-container">
+      <div className="background-image"></div>
+      <div className="site-name">droneforge.</div>
+      <div className="login-form-container">
+        <div className="login-content">
+          <h2 className="login-title">Welcome back! 👋</h2>
+          <p className="login-subtitle">Make your 🚁 assembly projects faster and easier with <strong>Drone Forge</strong>.</p>
+          <Form onSubmit={handleSubmit}>
+            {error && <Alert variant="danger">{error}</Alert>}
             <Form.Group controlId="formEmail">
-              <Form.Control
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              />
+              <Form.Control type="email" placeholder="Email" required onChange={handleEmailChange} />
             </Form.Group>
-            <Form.Group controlId="formPassword">
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
+            <Form.Group controlId="formPassword" className="password-group">
+              <Form.Control type="password" placeholder="Password" required onChange={handlePasswordChange} />
+              <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
             </Form.Group>
-            <Button variant="primary" type="submit" className="submit-button">Login</Button>
+            <Button type="submit" className="login-button">Login</Button>
+            <div className="auth-links">
+              <Link to="/signup" className="signup-link">Don't have an account? Sign up here!</Link>
+            </div>
           </Form>
-          <div className="forgot-password-link">
-            <Link to="/forgot-password">Forgot password?</Link>
-          </div>
-          <div className="signup-link">
-            <Link to="/signup">Don't have an account? Sign up here</Link>
-          </div>
         </div>
-        <div className="logo-column">
-          {/* Add your site logo or text here */}
-          <h1>Site Logo or Text</h1>
-        </div>
+        <div className="logo-container" ref={animationContainer}></div>
       </div>
-    </Container>
+    </div>
   );
 }
 

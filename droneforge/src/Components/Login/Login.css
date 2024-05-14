@@ -1,80 +1,181 @@
-body {
-    min-height: 100vh;
+* {
     margin: 0;
     padding: 0;
-    background-color: #f5f8fa;
+    box-sizing: border-box;
 }
 
-.container {
+body, button, input, textarea {
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f5f8fa;
+    background-color: #FAFAFA;
+    position: relative;
+    overflow: hidden;
+    flex-wrap: wrap; /* Allow wrapping */
 }
 
-.form-container {
-    display: flex;
-    width: 80%; 
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+.background-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1300px;
+    height: 740px;
+    background-image: url('../../assets/people-login.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out, background-image 0.5s ease-in-out;
 }
 
-.form-column h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-}
-
-#formEmail,
-#formPassword {
-  margin-bottom: 20px;
-}
-
-.submit-button {
+.login-form-container {
+    z-index: 10;
+    max-width: 400px;
     width: 100%;
-    font-size: 16px;
+    min-width: 300px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem; /* Add margin to allow wrapping */
 }
 
-.forgot-password-link {
-    margin-top: 20px;
+.login-title, .login-subtitle {
+    color: #333;
     text-align: center;
 }
-  
-.forgot-password-link a {
-    color: #007bff; 
+
+.login-title {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 32px;
 }
 
-.signup-link a {
-    color: #007bff;
+.login-subtitle {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.form-control, .login-button {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.form-control {
+    border: 2px solid #ccc;
+    height: 50px;
+    margin-bottom: 1rem;
+}
+
+.form-control:focus {
+    border-color: #8a2be2;
+    box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25);
+}
+
+.password-group {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.forgot-password {
+    position: absolute;
+    right: 0;
+    font-size: 0.8rem;
+    color: #888;
+    padding-right: 0.5rem;
+    margin-top: -0.7rem;
+}
+
+.login-button {
+    background-color: #222;
+    color: white;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    outline: none;
+}
+
+.login-button:hover {
+    background-color: #333;
+}
+
+.login-button:focus,
+.login-button:active {
+    background-color: #8a2be2;
+    box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25);
+    outline: none;
+}
+
+.login-button:focus:not(:focus-visible) {
+    background-color: #8a2be2;
 }
 
 .signup-link {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    color: #888;
+    display: block;
+    text-align: center;
+    font-size: 0.85em;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
 }
 
-.form-column {
-    /* allows the form column to grow and shrink as needed to fill the available space within its flex container */
-    flex: 1;
-    padding: 40px;
-    border-right: 1px solid #e1e8ed;
+.logo-container {
+    width: 90px;
+    opacity: 0.3;
+    margin-top: -2rem;
+    margin-bottom: -2.5rem;
 }
 
-.logo-column {
-    flex: 1; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #1da1f2;
-    border-top-right-radius: 10px; 
-    border-bottom-right-radius: 10px;
-    color: #fff;
+.site-name {
+    z-index: 1;
+    position: fixed;
+    top: 3vh;
+    left: 4vw;
+    font-size: 22px;
+    font-weight: 600;
+    color: #8a2be2;
+    z-index: 10;
+    transition: left 0.3s ease;
 }
 
-.logo-column h1 {
-    font-size: 36px; 
-    font-weight: bold;
+@media (max-width: 600px) {
+    .site-name {
+        left: 50%;
+        transform: translateX(-50%);
+        transition: left 0.3s ease, transform 0.3s ease;
+    }
+
+    .background-image {
+        height: 670px;
+        transform: translateX(-50%);
+        transition: left 0.3s ease, transform 0.5s ease;
+    }
+}
+
+@media (min-width: 601px) {
+    .background-image {
+        transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease;
+        transform: translate(-50%, -50%);
+    }
 }

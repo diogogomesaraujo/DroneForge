@@ -1,62 +1,173 @@
-body {
-    min-height: 100vh;
+* {
     margin: 0;
     padding: 0;
-    background-color: #f5f8fa;
+    box-sizing: border-box;
 }
 
-.container {
+body, button, input, textarea {
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f5f8fa;
+    background-color: #FAFAFA;
+    position: relative;
+    overflow: hidden; /* Ensure no overflow is visible */
+    flex-wrap: wrap; /* Allow wrapping */
 }
 
-.form-container {
-    display: flex;
-    width: 80%; 
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+.background-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1300px;
+    height: 740px;
+    background-image: url('../../assets/people-login.svg'); /* Ensure this path is correct */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out, background-image 0.5s ease-in-out; /* Smooth transition */
 }
 
-.form-column h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-}
-
-#formUsername,
-#formEmail,
-#formPassword {
-    margin-bottom: 20px;
-}
-
-.submit-button {
+.signup-form-container {
+    z-index: 10;
+    max-width: 400px;
     width: 100%;
-    font-size: 16px;
-}
-
-.form-column {
-    flex: 1;
-    padding: 40px;
-    border-right: 1px solid #e1e8ed;
-}
-
-.logo-column {
-    flex: 1; 
+    min-width: 300px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: #1da1f2;
-    border-top-right-radius: 10px; 
-    border-bottom-right-radius: 10px;
-    color: #fff;
+    margin: 1rem; /* Add margin to allow wrapping */
 }
 
-.logo-column h1 {
-    font-size: 36px; 
+.signup-title, .signup-subtitle {
+    color: #333;
+    text-align: center;
+}
+
+.signup-title {
+    margin-bottom: 0.5rem;
     font-weight: bold;
+    font-size: 32px;
+}
+
+.signup-subtitle {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.form-control, .signup-button {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.form-control {
+    border: 2px solid #ccc;
+    height: 50px;
+    margin-bottom: 1rem;
+}
+
+.form-control:focus {
+    border-color: #8a2be2;
+    box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25);
+}
+
+.password-group {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.signup-button {
+    background-color: #222;
+    color: white;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    outline: none;
+}
+
+.signup-button:hover {
+    background-color: #333;
+}
+
+.signup-button:focus,
+.signup-button:active {
+    background-color: #8a2be2;
+    box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25);
+    outline: none;
+}
+
+.signup-button:focus:not(:focus-visible) {
+    background-color: #8a2be2;
+}
+
+.login-link {
+    color: #888;
+    display: block;
+    text-align: center;
+    font-size: 0.85em;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.logo-container {
+    width: 90px;
+    opacity: 0.3;
+    margin-top: -2rem;
+    margin-bottom: -2.5rem;
+}
+
+.site-name {
+    z-index: 1;
+    position: fixed;
+    top: 3vh;
+    left: 4vw;
+    font-size: 22px;
+    font-weight: 600;
+    color: #8a2be2;
+    z-index: 10;
+    transition: left 0.3s ease;
+}
+
+@media (max-width: 600px) {
+    .site-name {
+        left: 50%;
+        transform: translateX(-50%);
+        transition: left 0.3s ease, transform 0.3s ease; /* Smooth transition for left and transform changes */
+    }
+
+    .background-image {
+        height: 670px; /* Fixed height */
+        transform: translateX(-50%);
+        transition: left 0.3s ease, transform 0.5s ease; /* Smooth transition for left and transform changes */
+    }
+}
+
+@media (min-width: 601px) {
+    .background-image {
+        transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease; /* Fluid transition for width, height, and transform changes */
+        transform: translate(-50%, -50%); /* Reset transform to center the image */
+    }
 }
 

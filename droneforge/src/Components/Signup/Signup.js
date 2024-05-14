@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import lottie from 'lottie-web';
 import './Signup.css';
 
 function Signup() {
@@ -9,6 +10,8 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const animationContainer = useRef(null);
+  const animationInstance = useRef(null);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -21,6 +24,38 @@ function Signup() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
+  useEffect(() => {
+    const loadAnimation = async () => {
+      try {
+        const response = await fetch('https://lottie.host/e6f0719e-2a73-425e-bb2a-060e348b2ebb/l3tqaZFSSh.json');
+        const data = await response.json();
+
+        if (animationInstance.current) {
+          animationInstance.current.destroy(); // Clean up the previous instance if it exists
+        }
+
+        animationInstance.current = lottie.loadAnimation({
+          container: animationContainer.current, // the container element
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: data, // the animation data
+        });
+      } catch (error) {
+        console.error('Failed to load animation data:', error);
+      }
+    };
+
+    loadAnimation();
+
+    // Cleanup function to destroy Lottie instance when component unmounts or re-renders
+    return () => {
+      if (animationInstance.current) {
+        animationInstance.current.destroy();
+      }
+    };
+  }, []); // Empty dependency array ensures this effect runs only once
 
   // The frontend sends a registration request to the backend.
   // Upon successful registration, the backend responds with a token.
@@ -55,48 +90,33 @@ function Signup() {
   };
 
   return (
-    <Container>
-      <div className="form-container">
-        <div className="form-column">
-          <h2>Sign Up</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit} id="signup-form">
+    <div className="signup-container">
+      <div className="background-image"></div>
+      <div className="site-name">droneforge.</div>
+      <div className="signup-form-container">
+        <div className="signup-content">
+          <h2 className="signup-title">Join us! 🚀</h2>
+          <p className="signup-subtitle">Sign up to make your 🚁 assembly projects with <strong>Drone Forge</strong>.</p>
+          <Form onSubmit={handleSubmit}>
+            {error && <Alert variant="danger">{error}</Alert>}
             <Form.Group controlId="formUsername">
-              <Form.Control
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={handleUsernameChange}
-                required
-              />
+              <Form.Control type="text" placeholder="Username" required onChange={handleUsernameChange} />
             </Form.Group>
             <Form.Group controlId="formEmail">
-              <Form.Control
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              />
+              <Form.Control type="email" placeholder="Email" required onChange={handleEmailChange} />
             </Form.Group>
-            <Form.Group controlId="formPassword">
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
+            <Form.Group controlId="formPassword" className="password-group">
+              <Form.Control type="password" placeholder="Password" required onChange={handlePasswordChange} />
             </Form.Group>
-            <Button variant="primary" type="submit" className="submit-button">Sign Up</Button>
+            <Button type="submit" className="signup-button">Sign Up</Button>
+            <div className="auth-links">
+              <Link to="/login" className="login-link">Already have an account? Login here!</Link>
+            </div>
           </Form>
         </div>
-        <div className="logo-column">
-          {/* Add your site logo or text here */}
-          <h1>Site Logo or Text</h1>
-        </div>
+        <div className="logo-container" ref={animationContainer}></div>
       </div>
-    </Container>
+    </div>
   );
 }
 
