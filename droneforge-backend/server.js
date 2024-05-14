@@ -7,7 +7,7 @@ const userRoutes = require('./Routes/userRoutes');
 
 const app = express();
 
-// Enable CORS to allow requests from http://localhost:3000
+// Enable CORS to allow requests from http://localhost:3000 
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
