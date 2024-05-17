@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { Eye, EyeSlash } from 'react-bootstrap-icons'; 
+import backgroundImage from '../../assets/person-signup.svg';
 import lottie from 'lottie-web';
 import './Signup.css';
 
+
 function Signup() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const animationContainer = useRef(null);
   const animationInstance = useRef(null);
@@ -25,10 +29,16 @@ function Signup() {
     setPassword(e.target.value);
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   useEffect(() => {
     const loadAnimation = async () => {
       try {
-        const response = await fetch('https://lottie.host/e6f0719e-2a73-425e-bb2a-060e348b2ebb/l3tqaZFSSh.json');
+        const response = await fetch(
+          "https://lottie.host/e6f0719e-2a73-425e-bb2a-060e348b2ebb/l3tqaZFSSh.json"
+        );
         const data = await response.json();
 
         if (animationInstance.current) {
@@ -37,13 +47,13 @@ function Signup() {
 
         animationInstance.current = lottie.loadAnimation({
           container: animationContainer.current, // the container element
-          renderer: 'svg',
+          renderer: "svg",
           loop: true,
           autoplay: true,
           animationData: data, // the animation data
         });
       } catch (error) {
-        console.error('Failed to load animation data:', error);
+        console.error("Failed to load animation data:", error);
       }
     };
 
@@ -63,21 +73,21 @@ function Signup() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/api/users/register', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8080/api/users/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, email, password }),
       });
       if (response.ok) {
         const data = await response.json();
         // Store the token in localStorage
-        localStorage.setItem('token', data.token);
-        console.log('Registration successful');
-        setError('');
+        localStorage.setItem("token", data.token);
+        console.log("Registration successful");
+        setError("");
         // Redirect to the homepage
-        navigate('/');
+        navigate("/");
       } else {
         // Handle errors from the server
         const data = await response.json();
@@ -85,39 +95,47 @@ function Signup() {
       }
     } catch (error) {
       // Handle network errors or other exceptions
-      setError('An error occurred while registering');
+      setError("An error occurred while registering");
     }
   };
 
   return (
     <div className="signup-container">
-      <div className="background-image"></div>
-      <div className="site-name">droneforge.</div>
-      <div className="signup-form-container">
-        <div className="signup-content">
-          <h2 className="signup-title">Join us! 🚀</h2>
-          <p className="signup-subtitle">Sign up to make your 🚁 assembly projects with <strong>Drone Forge</strong>.</p>
-          <Form onSubmit={handleSubmit}>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form.Group controlId="formUsername">
-              <Form.Control type="text" placeholder="Username" required onChange={handleUsernameChange} />
-            </Form.Group>
-            <Form.Group controlId="formEmail">
-              <Form.Control type="email" placeholder="Email" required onChange={handleEmailChange} />
-            </Form.Group>
-            <Form.Group controlId="formPassword" className="password-group">
-              <Form.Control type="password" placeholder="Password" required onChange={handlePasswordChange} />
-            </Form.Group>
-            <Button type="submit" className="signup-button">Sign Up</Button>
-            <div className="auth-links">
-              <Link to="/login" className="login-link">Already have an account? Login here!</Link>
+        <div className="background-image" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+        <div className="site-name">droneforge.</div>
+        <div className="signup-form-container">
+            <div className="signup-content">
+                <h2 className="signup-title">Join us! 🚀</h2>
+                <p className="signup-subtitle">Sign up to make your 🚁 assembly projects with <strong>Drone Forge</strong>.</p>
+                <Form onSubmit={handleSubmit}>
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <Form.Group controlId="formUsername">
+                        <Form.Control type="text" placeholder="Username" required onChange={handleUsernameChange} />
+                    </Form.Group>
+                    <Form.Group controlId="formEmail">
+                        <Form.Control type="email" placeholder="Email" required onChange={handleEmailChange} />
+                    </Form.Group>
+                    <Form.Group controlId="formPassword" className="password-group">
+                        <Form.Control
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Password"
+                            required
+                            onChange={handlePasswordChange}
+                        />
+                        <div className="password-toggle-icon" onClick={togglePasswordVisibility}>
+                            {showPassword ? <EyeSlash /> : <Eye />}
+                        </div>
+                    </Form.Group>
+                    <Button type="submit" className="signup-button">Sign Up</Button>
+                    <div className="auth-links">
+                        <Link to="/login" className="login-link">Already have an account? Login here!</Link>
+                    </div>
+                </Form>
             </div>
-          </Form>
+            <div className="logo-container" ref={animationContainer}></div>
         </div>
-        <div className="logo-container" ref={animationContainer}></div>
-      </div>
     </div>
-  );
+);
 }
 
 export default Signup;

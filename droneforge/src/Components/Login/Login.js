@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { Eye, EyeSlash } from 'react-bootstrap-icons';
+import backgroundImage from '../../assets/people-login.svg';
 import lottie from 'lottie-web';
 import './Login.css';
 
@@ -8,6 +10,8 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [fade, setFade] = useState('fade-in');
   const navigate = useNavigate();
   const animationContainer = useRef(null);
   const animationInstance = useRef(null);
@@ -18,6 +22,10 @@ function Login() {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   useEffect(() => {
@@ -83,9 +91,16 @@ function Login() {
     }
   };
 
+  useEffect(() => {
+    // Trigger fade-out effect before unmounting
+    const handleBeforeUnload = () => setFade('fade-out');
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, []);
+
   return (
     <div className="login-container">
-      <div className="background-image"></div>
+      <div className={`background-image ${fade}`} style={{ backgroundImage: `url(${backgroundImage})` }}></div>
       <div className="site-name">droneforge.</div>
       <div className="login-form-container">
         <div className="login-content">
@@ -97,7 +112,15 @@ function Login() {
               <Form.Control type="email" placeholder="Email" required onChange={handleEmailChange} />
             </Form.Group>
             <Form.Group controlId="formPassword" className="password-group">
-              <Form.Control type="password" placeholder="Password" required onChange={handlePasswordChange} />
+              <Form.Control
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                required
+                onChange={handlePasswordChange}
+              />
+              <div className="password-toggle-icon" onClick={togglePasswordVisibility}>
+                {showPassword ? <EyeSlash /> : <Eye />}
+              </div>
               <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
             </Form.Group>
             <Button type="submit" className="login-button">Login</Button>
