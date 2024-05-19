@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeSlash } from 'react-bootstrap-icons';
-import backgroundImage from '../../assets/people-login.svg';
+import './Login.css'; // Import Login CSS
 import lottie from 'lottie-web';
-import './Login.css';
+import backgroundImage from '../../assets/people-login.svg'; // Import the SVG image
+import { Eye, EyeSlash } from 'react-bootstrap-icons'; // Import Eye icons
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -15,18 +15,6 @@ function Login() {
   const navigate = useNavigate();
   const animationContainer = useRef(null);
   const animationInstance = useRef(null);
-  
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
 
   useEffect(() => {
     const loadAnimation = async () => {
@@ -59,8 +47,14 @@ function Login() {
       }
     };
   }, []); // Empty dependency array ensures this effect runs only once
-  
-  // Handle login form submission
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -72,21 +66,13 @@ function Login() {
         body: JSON.stringify({ email, password }),
       });
       if (response.ok) {
-        // User logged in successfully, extract token from response
         const data = await response.json();
-        const token = data.token;
-        // Store token securely
-        localStorage.setItem('token', token);
-        // Redirect to homepage
-        navigate('/main');
+        localStorage.setItem('token', data.token);
+        navigate('/main'); // Update the navigate function call to go to the main page
       } else {
-        // Handle login failure
-        console.error('Login failed:', response.statusText);
         setError('Invalid email or password');
       }
     } catch (error) {
-      // Handle network errors or other exceptions
-      console.error('An error occurred during login:', error);
       setError('An error occurred during login');
     }
   };
