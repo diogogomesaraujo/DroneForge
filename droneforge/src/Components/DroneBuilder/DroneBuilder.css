@@ -1,0 +1,214 @@
+/* Main container for the DroneBuilder component */
+.dronebuilder-container {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+/* Background overlay */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/background.png');
+  background-size: 720px 512px;
+  background-repeat: repeat;
+  background-position: top left;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Main content area next to the sidebar */
+.main-content {
+  margin-left: 250px;
+  padding: 2rem;
+  width: calc(100% - 250px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: margin-left 0.3s ease, width 0.3s ease;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.sidebar-container.collapsed ~ .main-content {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+}
+
+/* Header container styles */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.header-container span {
+  font-size: 2.5rem;
+  margin-bottom: -0rem;
+}
+
+.header-container h1 {
+  margin: 0;
+  font-size: 2.3rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Centered heading */
+.centered-heading {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+/* Wizard container styles */
+.wizard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+  margin-top: 1rem;
+}
+
+/* Scrollable part options */
+.part-options {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  justify-content: flex-start;
+  overflow-x: auto;
+  padding: 1rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.part-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  width: 200px;
+  height: 250px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #e0e0e0;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.part-item .image-placeholder {
+  width: 130px;
+  height: 130px;
+  background: #f0f0f0;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.part-item p {
+  color: #ccc;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.part-item.selected p,
+.part-item.selected .price {
+  color: #333;
+}
+
+.part-item.selected {
+  border: 2px solid #8a2be2;
+  box-shadow: 0 5px 10px rgba(106, 27, 154, 0.15);
+}
+
+.part-item.selected .check-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1rem;
+  color: #fff;
+  background: #8a2be2;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.part-item .price {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: #ccc;
+}
+
+/* Navigation buttons */
+.navigation-buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+}
+
+.prev-button, .next-button, .confirm-button {
+  padding: 0.75rem 2.5rem;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  margin: 0.5rem;
+}
+
+.prev-button:hover, .next-button:hover, .confirm-button:hover {
+  background: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+/* Bottom bar container styles */
+.bottom-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+}
+
+.bar-container {
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.bar-container p {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.bar-container p .price {
+  font-weight: bold;
+  color: #333;
+}

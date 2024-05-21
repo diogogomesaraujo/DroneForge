@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Nav, Button } from 'react-bootstrap';
 import { ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons';
 import './Sidebar.css'; // Custom CSS for styling
+import userAvatar from '../../assets/Avatars/purple.png'; // Import the image
 
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState('dashboard');
@@ -31,7 +32,7 @@ const Sidebar = () => {
         <div className="sidebar-header">
           <div className="user-info">
             <div className="user-avatar">
-              <span>DA</span>
+              <img src={userAvatar} alt="User Avatar" />
             </div>
             {!collapsed && (
               <div className="user-details ms-2">

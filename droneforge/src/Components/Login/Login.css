@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-body, button, input, textarea {
+body, button, input, textarea, .login-title, .login-subtitle, .forgot-password, .signup-link, .site-name {
     font-family: 'Poppins', sans-serif;
 }
 
@@ -172,7 +172,7 @@ html, body {
     position: fixed;
     top: 20px;
     left: 30px;
-    font-size: 22px;
+    font-size: 23px;
     font-weight: 600;
     color: #8a2be2;
     z-index: 10;

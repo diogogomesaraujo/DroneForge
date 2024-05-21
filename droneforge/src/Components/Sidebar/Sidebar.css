@@ -1,4 +1,7 @@
-/* Existing CSS */
+/* Common CSS */
+body, button, input, textarea, .sidebar-header, .sidebar-footer, .sidebar-link, .user-details {
+  font-family: 'Poppins', sans-serif;
+}
 
 .sidebar-container {
   position: fixed;
@@ -60,8 +63,8 @@
 }
 
 .sidebar-header .user-avatar {
-  width: 55px; /* Adjust size as needed */
-  height: 55px; /* Adjust size as needed */
+  width: 60px; /* Adjust size as needed */
+  height: 60px; /* Adjust size as needed */
   background-color: #6c757d;
   color: #fff;
   display: flex;
@@ -70,6 +73,14 @@
   border-radius: 50%;
   font-weight: bold;
   font-size: 1.5rem; /* Adjust font size as needed */
+  overflow: hidden; /* Ensure the image fits within the circle */
+}
+
+.sidebar-header .user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire circle */
+  border-radius: 50%; /* Ensures the image itself is also a circle */
 }
 
 .sidebar-header .user-details {
