@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { Check } from 'react-bootstrap-icons';
 import './DroneBuilder.css';
@@ -40,34 +40,80 @@ const parts = {
     { name: 'Camera C', price: 160 },
     { name: 'Camera D', price: 170 },
   ],
+  gps: [
+    { name: 'GPS Module 1', price: 50 },
+    { name: 'GPS Module 2', price: 60 },
+    { name: 'GPS Module 3', price: 55 },
+    { name: 'GPS Module 4', price: 65 },
+  ],
+  sensor: [
+    { name: 'Sensor 1', price: 40 },
+    { name: 'Sensor 2', price: 45 },
+    { name: 'Sensor 3', price: 42 },
+    { name: 'Sensor 4', price: 48 },
+  ],
 };
 
 const DroneBuilder = () => {
   const [selectedParts, setSelectedParts] = useState({
     frame: null,
-    motor: null,
+    motor: { part: null, quantity: 1 },
     controller: null,
-    propeller: null,
-    battery: null,
+    propeller: { part: null, quantity: 1 },
+    battery: { part: null, quantity: 1 },
     camera: null,
+    gps: null,
+    sensor: { part: null, quantity: 1 },
   });
 
   const [currentStep, setCurrentStep] = useState(1);
   const [wordTransitioning, setWordTransitioning] = useState(false);
   const [partTransitioning, setPartTransitioning] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handlePartSelect = (type, part) => {
-    setSelectedParts((prevSelectedParts) => ({
+    if (['motor', 'propeller', 'battery', 'sensor'].includes(type)) {
+      setSelectedParts((prevSelectedParts) => ({
+        ...prevSelectedParts,
+        [type]: { ...prevSelectedParts[type], part },
+      }));
+    } else {
+      setSelectedParts((prevSelectedParts) => ({
+        ...prevSelectedParts,
+        [type]: part,
+      }));
+    }
+  };
+
+  const handleQuantityChange = (type, event) => {
+    let value = event.target.value;
+    const quantity = value === '' ? '' : Math.max(1, parseInt(value));
+    setSelectedParts(prevSelectedParts => ({
       ...prevSelectedParts,
-      [type]: part,
+      [type]: { ...prevSelectedParts[type], quantity },
     }));
   };
 
-  const calculateTotalPrice = () => {
-    return Object.values(selectedParts).reduce((total, part) => {
-      return total + (part ? part.price : 0);
-    }, 0);
+  const handleInputFocus = (event) => {
+    event.target.select();
   };
+
+  useEffect(() => {
+    const calculateTotalPrice = () => {
+      let total = 0;
+      Object.values(selectedParts).forEach((part) => {
+        if (part && typeof part === 'object' && part.part) {
+          total += (part.part.price || 0) * (part.quantity || 1);
+        } else if (part) {
+          total += part.price || 0;
+        }
+      });
+      return total;
+    };
+
+    const newTotalPrice = calculateTotalPrice();
+    setTotalPrice(newTotalPrice);
+  }, [selectedParts]);
 
   const nextStep = () => {
     if (currentStep < steps.length) {
@@ -77,7 +123,7 @@ const DroneBuilder = () => {
         setCurrentStep((prevStep) => prevStep + 1);
         setWordTransitioning(false);
         setPartTransitioning(false);
-      }, 300); // Match the duration of the transition
+      }, 300);
     }
   };
 
@@ -89,7 +135,7 @@ const DroneBuilder = () => {
         setCurrentStep((prevStep) => prevStep - 1);
         setWordTransitioning(false);
         setPartTransitioning(false);
-      }, 300); // Match the duration of the transition
+      }, 300);
     }
   };
 
@@ -100,6 +146,8 @@ const DroneBuilder = () => {
     'propeller',
     'battery',
     'camera',
+    'gps',
+    'sensor',
   ];
 
   const currentPartType = steps[currentStep - 1];
@@ -121,13 +169,13 @@ const DroneBuilder = () => {
             {parts[currentPartType].map((part) => (
               <div
                 key={part.name}
-                className={`part-item ${selectedParts[currentPartType]?.name === part.name ? 'selected' : ''}`}
+                className={`part-item ${selectedParts[currentPartType]?.part?.name === part.name || selectedParts[currentPartType]?.name === part.name ? 'selected' : ''}`}
                 onClick={() => handlePartSelect(currentPartType, part)}
               >
                 <div className="image-placeholder"></div>
                 <p>{part.name}</p>
                 <p className="price">${part.price}</p>
-                {selectedParts[currentPartType]?.name === part.name && (
+                {(selectedParts[currentPartType]?.part?.name === part.name || selectedParts[currentPartType]?.name === part.name) && (
                   <div className="check-icon">
                     <Check />
                   </div>
@@ -135,9 +183,23 @@ const DroneBuilder = () => {
               </div>
             ))}
           </div>
+          {['motor', 'propeller', 'battery', 'sensor'].includes(currentPartType) && (
+            <div className="quantity-selector">
+              <label htmlFor={`${currentPartType}-quantity`}>Quantity:</label>
+              <input
+                id={`${currentPartType}-quantity`}
+                type="number"
+                min="1"
+                step="1"  // Slows down the scrolling speed
+                value={selectedParts[currentPartType]?.quantity}
+                onChange={(e) => handleQuantityChange(currentPartType, e)}
+                onFocus={handleInputFocus}
+              />
+            </div>
+          )}
         </div>
         <div className="bar-container centered">
-          <p>Total Price: <span className="price">${calculateTotalPrice()}</span></p>
+          <p>Total Price: <span className="price">${totalPrice}</span></p>
         </div>
         <div className="navigation-buttons centered">
           {currentStep > 1 && <button className="button-common" onClick={prevStep}>Previous</button>}
