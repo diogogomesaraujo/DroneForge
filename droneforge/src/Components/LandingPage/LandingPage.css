@@ -1,0 +1,309 @@
+/* Common CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, button, input, textarea, .landing-hero-title, .landing-hero-subtitle, .landing-hero-text, .landing-forgot-password, .landing-signup-link, .landing-site-name {
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #ffffff;
+}
+
+.landing-background-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1300px;
+    height: 740px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out, background-image 0.5s ease-in-out;
+}
+
+.landing-background-image.fade-in {
+    opacity: 1;
+}
+
+.landing-background-image.fade-out {
+    opacity: 0;
+}
+
+/* Navbar CSS */
+.landing-navbar-custom {
+    background-color: #fff;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.landing-navbar-brand-custom {
+    color: #8a2be2;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-right: 2rem;
+    transition: none;
+}
+
+.landing-nav-links-custom {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.landing-nav-link-custom {
+    color: #888;
+    margin-right: 1.5rem;
+    transition: color 0.3s, transform 0.3s;
+    font-weight: 500;
+}
+
+.landing-nav-link-custom:hover {
+    color: #8a2be2;
+    transform: translateY(-2px);
+}
+
+.landing-btn-signin {
+    color: #888;
+    margin-right: 1rem;
+    padding: 0.5rem 1.5rem;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: 500;
+}
+
+.landing-btn-signin:hover {
+    transform: translateY(-2px);
+}
+
+.landing-btn-signup {
+    background-color: #8a2be2;
+    color: #fff;
+    border: none;
+    border-radius: 18px;
+    padding: 0.5rem 1.5rem;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+}
+
+.landing-btn-signup:hover {
+    background-color: #6a1bb5;
+    transform: translateY(-2px);
+}
+
+/* Hero section */
+.landing-hero-section {
+    background: linear-gradient(to bottom, #ffffff, #e6d4ff);
+    padding: 5rem 2rem; /* Add side padding */
+    color: #333;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: none;
+    background-color: #fff; /* Ensure white background flows seamlessly */
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.landing-hero-section::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-bottom: 5px solid transparent;
+    background: linear-gradient(135deg, #8a2be2, #ff7ec6);
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.landing-hero-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.landing-hero-subtitle {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.landing-hero-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #777;
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.landing-bold-purple {
+    font-weight: bold;
+    color: #8a2be2;
+}
+
+.landing-btn-get-started {
+    background-color: #8a2be2;
+    border: none;
+    border-radius: 1.7rem;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+}
+
+.landing-btn-get-started:hover {
+    background-color: #6a1bb5;
+    transform: scale(1.05);
+}
+
+/* Features section */
+.landing-features-section {
+    padding: 4rem 2rem; /* Add side padding */
+    background-color: #fff;
+    text-align: center;
+    border-radius: 15px;
+    margin: 2rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.landing-features-section h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.landing-features-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #777;
+}
+
+.landing-highlight {
+    color: #8a2be2;
+}
+
+.landing-btn-learn-more {
+    color: #8a2be2;
+    transition: color 0.3s;
+}
+
+.landing-btn-learn-more:hover {
+    color: #6a1bb5;
+}
+
+/* How it works section */
+.landing-how-it-works-section {
+    padding: 4rem 2rem; /* Add side padding */
+    background-color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    margin: 2rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.landing-how-it-works-section h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.landing-steps-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.landing-step {
+    flex: 1;
+    margin: 1rem 0;
+    padding: 2rem;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.landing-step h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.landing-step p {
+    font-size: 1rem;
+    color: #777;
+}
+
+.landing-icon-box {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background: #8a2be2;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.landing-icon-box i {
+    font-size: 2rem;
+}
+
+/* Footer section */
+.landing-footer-section {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.landing-footer-section p {
+    margin: 0;
+}
+
+/* Additional styling */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .landing-steps-container {
+        flex-direction: row;
+    }
+
+    .landing-step {
+        margin: 0 1rem;
+    }
+}

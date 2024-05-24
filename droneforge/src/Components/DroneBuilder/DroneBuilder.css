@@ -6,39 +6,39 @@
 }
 
 /* Background overlay */
-.background-overlay {
+.dronebuilder-background-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-image: url('../../assets/background.png');
-  background-size: 100% 100%;
-  background-position: top left;
-  opacity: 0.05;
-  z-index: -1;
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+  opacity: 0.07;
+  z-index: 0;
 }
 
 /* Main content area next to the sidebar */
-.main-content {
+.dronebuilder-main-content {
   margin-left: 250px;
   padding: 2rem;
   width: calc(100% - 250px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   transition: margin-left 0.3s ease, width 0.3s ease;
-  overflow: auto;
+  overflow-y: auto;
 }
 
-.sidebar-container.collapsed ~ .main-content {
+.dronebuilder-sidebar-container.collapsed ~ .dronebuilder-main-content {
   margin-left: 80px;
   width: calc(100% - 80px);
 }
 
 /* Header container styles */
-.header-container {
+.dronebuilder-header-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,12 +46,12 @@
   width: 100%;
 }
 
-.header-container span {
-  font-size: 2.5rem;
+.dronebuilder-header-container span {
+  font-size: 2.4rem;
   margin-bottom: -0rem;
 }
 
-.header-container h1 {
+.dronebuilder-header-container h1 {
   margin: 0;
   font-size: 2.3rem;
   font-weight: bold;
@@ -59,20 +59,23 @@
 }
 
 /* Centered heading */
-.centered-heading {
+.dronebuilder-centered-heading {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.1rem;
   margin-bottom: 1rem;
   margin-top: 2rem;
 }
 
-.word-text {
-  color: #8a2be2; /* Purple color */
+.dronebuilder-word-text {
+  background: linear-gradient(to right, #8a2be2, #a184f8); /* Gradient from purple to a lighter purple */
+  -webkit-background-clip: text; /* For Safari */
+  -webkit-text-fill-color: transparent; /* For Safari */
+  color: #8a2be2; /* Fallback for other browsers */
   text-shadow: 0 0 20px rgba(138, 43, 226, 0.1); /* Purple glow */
 }
 
 /* Wizard container styles */
-.wizard-container {
+.dronebuilder-wizard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,39 +86,39 @@
 }
 
 /* Add fade-in and fade-out animations for the component type word and part options */
-@keyframes fadeIn {
+@keyframes dronebuilder-fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes fadeOut {
+@keyframes dronebuilder-fadeOut {
   from { opacity: 1; }
   to { opacity: 0; }
 }
 
 /* Add a class for the hidden state */
-.word-hidden {
+.dronebuilder-word-hidden {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 
-.word-visible {
+.dronebuilder-word-visible {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
 
-.part-hidden {
+.dronebuilder-part-hidden {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 
-.part-visible {
+.dronebuilder-part-visible {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
 
 /* Scrollable part options */
-.part-options {
+.dronebuilder-part-options {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -127,7 +130,7 @@
   overflow-y: auto;
 }
 
-.part-item {
+.dronebuilder-part-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -139,19 +142,19 @@
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.4);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   border: 2px solid #e0e0e0;
   position: relative;
   flex-shrink: 0;
 }
 
-.part-item:hover {
+.dronebuilder-part-item:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   transform: translateY(-5px);
 }
 
-.part-item .image-placeholder {
+.dronebuilder-part-item .dronebuilder-image-placeholder {
   width: 130px;
   height: 130px;
   background: #f0f0f0;
@@ -159,24 +162,24 @@
   margin-bottom: 1rem;
 }
 
-.part-item p {
+.dronebuilder-part-item p {
   color: #ccc;
   margin: 0;
   font-size: 1.1rem;
 }
 
-.part-item.selected p,
-.part-item.selected .price {
+.dronebuilder-part-item.selected p,
+.dronebuilder-part-item.selected .dronebuilder-price {
   color: #333;
 }
 
-.part-item.selected {
+.dronebuilder-part-item.selected {
   border: 2px solid #8a2be2; /* Purple border */
   box-shadow: 0 0 15px rgba(138, 43, 226, 0.1); /* Purple glow */
   background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white background for better contrast */
 }
 
-.part-item.selected .check-icon {
+.dronebuilder-part-item.selected .dronebuilder-check-icon {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -191,7 +194,7 @@
   justify-content: center;
 }
 
-.part-item .price {
+.dronebuilder-part-item .dronebuilder-price {
   font-weight: bold;
   font-size: 1.2rem;
   margin-top: 0.5rem;
@@ -199,7 +202,7 @@
 }
 
 /* Quantity selector styles */
-.quantity-selector {
+.dronebuilder-quantity-selector {
   margin-top: 1rem;
   text-align: center;
   display: flex;
@@ -207,14 +210,14 @@
   justify-content: center;
 }
 
-.quantity-selector label {
+.dronebuilder-quantity-selector label {
   margin-right: 0.5rem;
   font-size: 0.8rem; /* Smaller font size */
   color: #aaa; /* Lighter color */
 }
 
-.quantity-selector input {
-  width: 50px; /* Smaller width */
+.dronebuilder-quantity-selector input {
+  width: 40px; /* Smaller width */
   padding: 0.3rem;
   font-size: 0.9rem;
   border: 1px solid #ccc; /* Lighter, thinner border */
@@ -226,19 +229,19 @@
   transition: box-shadow 0.3s ease;
 }
 
-.quantity-selector input:focus {
+.dronebuilder-quantity-selector input:focus {
   border-color: #8a2be2; /* Keep border color purple on focus */
   box-shadow: 0 0 8px rgba(138, 43, 226, 0.2); /* Optional: Add a purple glow effect when focused */
 }
 
-.quantity-selector input::-webkit-outer-spin-button,
-.quantity-selector input::-webkit-inner-spin-button {
+.dronebuilder-quantity-selector input::-webkit-outer-spin-button,
+.dronebuilder-quantity-selector input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Navigation buttons */
-.navigation-buttons {
+.dronebuilder-navigation-buttons {
   margin-top: 1rem;
   display: flex;
   justify-content: center;
@@ -247,7 +250,7 @@
   align-items: center;
 }
 
-.button-common {
+.dronebuilder-button-common {
   padding: 0.75rem 2.5rem;
   background: #000;
   color: #fff;
@@ -260,14 +263,14 @@
   width: 150px;
 }
 
-.button-common:hover {
+.dronebuilder-button-common:hover {
   background: #333;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-3px);
 }
 
 /* Bottom bar container styles */
-.bottom-bar {
+.dronebuilder-bottom-bar {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -279,26 +282,26 @@
   bottom: 0;
 }
 
-.bar-container {
+.dronebuilder-bar-container {
   text-align: center;
   width: 100%;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.bar-container p {
+.dronebuilder-bar-container p {
   margin: 0;
   font-size: 1.2rem;
   color: #888;
 }
 
-.bar-container p .price {
+.dronebuilder-bar-container p .dronebuilder-price {
   font-weight: bold;
   color: #333;
 }
 
 /* Progress bar styles */
-.progress-bar-container {
+.dronebuilder-progress-bar-container {
   position: fixed;
   bottom: 0;
   left: 250px;
@@ -307,7 +310,7 @@
   background-color: #e0e0e0;
 }
 
-.progress-bar {
+.dronebuilder-progress-bar {
   height: 100%;
   width: 0;
   background-color: #333;
@@ -315,28 +318,32 @@
 
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
-  .main-content {
+  .dronebuilder-main-content {
     margin-left: 80px;
     width: calc(100% - 80px);
   }
 
-  .header-container {
-    opacity: 0;
+  .dronebuilder-header-container {
+    padding: 1rem 0; /* Adjust padding for smaller screens */
   }
 
-  .progress-bar-container {
+  .dronebuilder-progress-bar-container {
     left: 80px;
     width: calc(100% - 80px);
   }
 }
 
 @media (max-width: 480px) {
-  .main-content {
+  .dronebuilder-main-content {
     margin-left: 0;
     width: 100%;
   }
 
-  .progress-bar-container {
+  .dronebuilder-header-container {
+    padding: 1rem 0; /* Adjust padding for smaller screens */
+  }
+
+  .dronebuilder-progress-bar-container {
     left: 0;
     width: 100%;
   }

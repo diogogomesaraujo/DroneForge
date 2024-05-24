@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Nav, Button } from 'react-bootstrap';
 import { ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons';
+import { jwtDecode } from 'jwt-decode'; // Correct named import
 import './Sidebar.css'; // Custom CSS for styling
 import userAvatar from '../../assets/Avatars/purple.png'; // Import the image
 
@@ -9,6 +10,20 @@ const Sidebar = () => {
   const [activeFooterLink, setActiveFooterLink] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
   const [clicked, setClicked] = useState(false); // State to track if the button is clicked
+  const [userInfo, setUserInfo] = useState({ name: '', username: '' });
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken); // Log the decoded token to the console
+        setUserInfo({ name: decodedToken.name, username: decodedToken.username });
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
+  }, []);
 
   const handleNavClick = (link) => {
     setActiveLink(link);
@@ -36,8 +51,8 @@ const Sidebar = () => {
             </div>
             {!collapsed && (
               <div className="user-details ms-2">
-                <p className="m-0">Diogo Araújo</p>
-                <small>@diogoaraujo_04</small>
+                <p className="m-0">{userInfo.name}</p>
+                <small>@{userInfo.username}</small>
               </div>
             )}
           </div>
