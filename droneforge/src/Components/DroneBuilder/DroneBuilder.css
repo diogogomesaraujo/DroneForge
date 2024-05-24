@@ -214,7 +214,7 @@
 }
 
 .quantity-selector input {
-  width: 50px; /* Smaller width */
+  width: 40px; /* Smaller width */
   padding: 0.3rem;
   font-size: 0.9rem;
   border: 1px solid #ccc; /* Lighter, thinner border */

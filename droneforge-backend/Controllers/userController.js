@@ -19,7 +19,11 @@ exports.registerUser = async (req, res) => {
     await newUser.save();
 
     // Generate JWT token using the secret key
-    const token = jwt.sign({ userId: newUser._id }, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign(
+      { userId: newUser._id, username: newUser.username, name: newUser.username }, // Include username and name
+      secretKey,
+      { expiresIn: '1h' }
+    );
 
     // Respond with success message and token
     res.status(201).json({ message: 'User registered successfully', token });
@@ -29,6 +33,7 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+// Controller function to handle user login
 exports.loginUser = async (req, res) => {
   try {
     // Extract username and password from request body
@@ -51,7 +56,11 @@ exports.loginUser = async (req, res) => {
     }
 
     // Generate JWT token using the secret key
-    const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign(
+      { userId: user._id, username: user.username, name: user.username }, // Include username and name
+      secretKey,
+      { expiresIn: '1h' }
+    );
 
     // Respond with success message and token
     res.status(200).json({ message: 'Login successful', token });
@@ -59,4 +68,4 @@ exports.loginUser = async (req, res) => {
     console.error('Error logging in user:', error);
     res.status(500).json({ error: 'Failed to log in user' });
   }
-}
+};
