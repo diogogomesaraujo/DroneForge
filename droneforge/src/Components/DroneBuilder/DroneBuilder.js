@@ -155,28 +155,28 @@ const DroneBuilder = () => {
 
   return (
     <div className="dronebuilder-container">
-      <div className="dronebuilder-background-overlay"></div>
+      <div className="background-overlay"></div>
       <Sidebar />
-      <div className="dronebuilder-main-content">
-        <div className="dronebuilder-header-container">
+      <div className="main-content">
+        <div className="header-container">
           <span role="img" aria-label="drone">🛠️</span>
         </div>
-        <div className="dronebuilder-wizard-container">
-          <h2 className="dronebuilder-centered-heading">
-            What <span className={`dronebuilder-word-text ${wordTransitioning ? 'dronebuilder-word-hidden' : 'dronebuilder-word-visible'}`}><strong>{currentPartType.charAt(0).toUpperCase() + currentPartType.slice(1)}</strong></span> would you like to select?
+        <div className="wizard-container">
+          <h2 className="centered-heading">
+            What <span className={`word-text ${wordTransitioning ? 'word-hidden' : 'word-visible'}`}><strong>{currentPartType.charAt(0).toUpperCase() + currentPartType.slice(1)}</strong></span> would you like to select?
           </h2>
-          <div className={`dronebuilder-part-options dronebuilder-centered ${partTransitioning ? 'dronebuilder-part-hidden' : 'dronebuilder-part-visible'}`}>
+          <div className={`part-options centered ${partTransitioning ? 'part-hidden' : 'part-visible'}`}>
             {parts[currentPartType].map((part) => (
               <div
                 key={part.name}
-                className={`dronebuilder-part-item ${selectedParts[currentPartType]?.part?.name === part.name || selectedParts[currentPartType]?.name === part.name ? 'dronebuilder-selected' : ''}`}
+                className={`part-item ${selectedParts[currentPartType]?.part?.name === part.name || selectedParts[currentPartType]?.name === part.name ? 'selected' : ''}`}
                 onClick={() => handlePartSelect(currentPartType, part)}
               >
-                <div className="dronebuilder-image-placeholder"></div>
+                <div className="image-placeholder"></div>
                 <p>{part.name}</p>
-                <p className="dronebuilder-price">${part.price}</p>
+                <p className="price">${part.price}</p>
                 {(selectedParts[currentPartType]?.part?.name === part.name || selectedParts[currentPartType]?.name === part.name) && (
-                  <div className="dronebuilder-check-icon">
+                  <div className="check-icon">
                     <Check />
                   </div>
                 )}
@@ -184,7 +184,7 @@ const DroneBuilder = () => {
             ))}
           </div>
           {['motor', 'propeller', 'battery', 'sensor'].includes(currentPartType) && (
-            <div className="dronebuilder-quantity-selector">
+            <div className="quantity-selector">
               <label htmlFor={`${currentPartType}-quantity`}>Quantity:</label>
               <input
                 id={`${currentPartType}-quantity`}
@@ -198,13 +198,13 @@ const DroneBuilder = () => {
             </div>
           )}
         </div>
-        <div className="dronebuilder-bar-container dronebuilder-centered">
-          <p>Total Price: <span className="dronebuilder-price">${totalPrice}</span></p>
+        <div className="bar-container centered">
+          <p>Total Price: <span className="price">${totalPrice}</span></p>
         </div>
-        <div className="dronebuilder-navigation-buttons dronebuilder-centered">
-          {currentStep > 1 && <button className="dronebuilder-button-common" onClick={prevStep}>Previous</button>}
-          {!isLastStep && <button className="dronebuilder-button-common" onClick={nextStep}>Next</button>}
-          {isLastStep && <button className="dronebuilder-button-common">Confirm</button>}
+        <div className="navigation-buttons centered">
+          {currentStep > 1 && <button className="button-common" onClick={prevStep}>Previous</button>}
+          {!isLastStep && <button className="button-common" onClick={nextStep}>Next</button>}
+          {isLastStep && <button className="button-common">Confirm</button>}
         </div>
       </div>
     </div>
