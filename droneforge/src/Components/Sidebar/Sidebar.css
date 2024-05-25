@@ -212,7 +212,8 @@ body, button, input, textarea, .sidebar-header, .sidebar-footer, .sidebar-link, 
 
 .floating-collapse-btn:active,
 .floating-collapse-btn.clicked {
-  color: #8a2be2; /* Purple color on active and clicked */
+  color: #8a2be2 !important; /* Purple color on active and clicked */
+  background-color: #fff !important;
 }
 
 /* New CSS for centering the "droneforge." text at the bottom */
