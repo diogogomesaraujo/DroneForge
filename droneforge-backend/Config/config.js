@@ -1,8 +1,5 @@
-const crypto = require('crypto');
-
-// Generate a random secret key
-const secretKey = crypto.randomBytes(32).toString('hex');
+require('dotenv').config();
 
 module.exports = {
-  secretKey: secretKey
+  secretKey: process.env.JWT_SECRET
 };
