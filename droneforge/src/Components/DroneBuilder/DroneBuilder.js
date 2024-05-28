@@ -3,58 +3,17 @@ import Sidebar from '../Sidebar/Sidebar';
 import { Check } from 'react-bootstrap-icons';
 import './DroneBuilder.css';
 
-const parts = {
-  frame: [
-    { name: 'Frame A', price: 50 },
-    { name: 'Frame B', price: 70 },
-    { name: 'Frame C', price: 60 },
-    { name: 'Frame D', price: 80 },
-  ],
-  motor: [
-    { name: 'Motor X', price: 100 },
-    { name: 'Motor Y', price: 150 },
-    { name: 'Motor Z', price: 130 },
-    { name: 'Motor W', price: 120 },
-  ],
-  controller: [
-    { name: 'Controller 1', price: 200 },
-    { name: 'Controller 2', price: 250 },
-    { name: 'Controller 3', price: 230 },
-    { name: 'Controller 4', price: 220 },
-  ],
-  propeller: [
-    { name: 'Propeller A', price: 20 },
-    { name: 'Propeller B', price: 25 },
-    { name: 'Propeller C', price: 22 },
-    { name: 'Propeller D', price: 28 },
-  ],
-  battery: [
-    { name: 'Battery A', price: 80 },
-    { name: 'Battery B', price: 90 },
-    { name: 'Battery C', price: 85 },
-    { name: 'Battery D', price: 95 },
-  ],
-  camera: [
-    { name: 'Camera A', price: 150 },
-    { name: 'Camera B', price: 180 },
-    { name: 'Camera C', price: 160 },
-    { name: 'Camera D', price: 170 },
-  ],
-  gps: [
-    { name: 'GPS Module 1', price: 50 },
-    { name: 'GPS Module 2', price: 60 },
-    { name: 'GPS Module 3', price: 55 },
-    { name: 'GPS Module 4', price: 65 },
-  ],
-  sensor: [
-    { name: 'Sensor 1', price: 40 },
-    { name: 'Sensor 2', price: 45 },
-    { name: 'Sensor 3', price: 42 },
-    { name: 'Sensor 4', price: 48 },
-  ],
-};
-
 const DroneBuilder = () => {
+  const [parts, setParts] = useState({
+    frame: [],
+    motor: [],
+    controller: [],
+    propeller: [],
+    battery: [],
+    camera: [],
+    gps: [],
+    sensor: [],
+  });
   const [selectedParts, setSelectedParts] = useState({
     frame: null,
     motor: { part: null, quantity: 1 },
@@ -65,11 +24,43 @@ const DroneBuilder = () => {
     gps: null,
     sensor: { part: null, quantity: 1 },
   });
-
   const [currentStep, setCurrentStep] = useState(1);
   const [wordTransitioning, setWordTransitioning] = useState(false);
   const [partTransitioning, setPartTransitioning] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    const fetchParts = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log("Token:", token); // Ensure the token is being logged correctly
+        const response = await fetch("http://localhost:8080/api/drones/parts", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        const partsByType = {
+          frame: [],
+          motor: [],
+          controller: [],
+          propeller: [],
+          battery: [],
+          camera: [],
+          gps: [],
+          sensor: [],
+        };
+        data.forEach((part) => {
+          partsByType[part.type].push(part);
+        });
+        setParts(partsByType);
+      } catch (error) {
+        console.error("Error fetching parts:", error);
+      }
+    };
+  
+    fetchParts();
+  }, []);    
 
   const handlePartSelect = (type, part) => {
     if (['motor', 'propeller', 'battery', 'sensor'].includes(type)) {
@@ -88,7 +79,7 @@ const DroneBuilder = () => {
   const handleQuantityChange = (type, event) => {
     let value = event.target.value;
     const quantity = value === '' ? '' : Math.max(1, parseInt(value));
-    setSelectedParts(prevSelectedParts => ({
+    setSelectedParts((prevSelectedParts) => ({
       ...prevSelectedParts,
       [type]: { ...prevSelectedParts[type], quantity },
     }));
@@ -153,6 +144,56 @@ const DroneBuilder = () => {
   const currentPartType = steps[currentStep - 1];
   const isLastStep = currentStep === steps.length;
 
+  const handleConfirm = async () => {
+    try {
+      const parts = {
+        frame: selectedParts.frame._id,
+        motor: {
+          part: selectedParts.motor.part._id,
+          quantity: selectedParts.motor.quantity,
+        },
+        controller: selectedParts.controller._id,
+        propeller: {
+          part: selectedParts.propeller.part._id,
+          quantity: selectedParts.propeller.quantity,
+        },
+        battery: {
+          part: selectedParts.battery.part._id,
+          quantity: selectedParts.battery.quantity,
+        },
+        camera: selectedParts.camera._id,
+        gps: selectedParts.gps._id,
+        sensor: {
+          part: selectedParts.sensor.part._id,
+          quantity: selectedParts.sensor.quantity,
+        },
+      };
+  
+      const response = await fetch("http://localhost:8080/api/drones/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          name: "My Custom Drone", // You can dynamically set this name if needed
+          parts,
+          totalPrice,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong");
+      }
+  
+      console.log("Drone created:", data);
+    } catch (error) {
+      console.error("Error creating drone:", error);
+    }
+  };  
+
   return (
     <div className="dronebuilder-container">
       <div className="background-overlay"></div>
@@ -204,7 +245,7 @@ const DroneBuilder = () => {
         <div className="navigation-buttons centered">
           {currentStep > 1 && <button className="button-common" onClick={prevStep}>Previous</button>}
           {!isLastStep && <button className="button-common" onClick={nextStep}>Next</button>}
-          {isLastStep && <button className="button-common">Confirm</button>}
+          {isLastStep && <button className="button-common" onClick={handleConfirm}>Confirm</button>}
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@
   display: flex;
   height: 100vh;
   position: relative;
+  background: linear-gradient(to bottom, #ffffff, #f6f1ff); /* Gradient background */
 }
 
 /* Background overlay */
@@ -16,7 +17,7 @@
   background-size: cover; /* Ensures the image covers the entire background */
   background-position: center center; /* Centers the background image */
   background-repeat: no-repeat; /* Prevents the background image from repeating */
-  opacity: 0.07;
+  opacity: 0.05;
   z-index: 0;
 }
 
@@ -139,11 +140,11 @@
   padding: 1rem;
   width: 200px;
   height: 250px;
-  border-radius: 15px;
+  border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   border: 2px solid #e0e0e0;
   position: relative;
@@ -182,8 +183,8 @@
 
 .part-item.selected .check-icon {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 10px;
+  right: 10px;
   font-size: 1rem;
   color: #fff;
   background: #8a2be2;
@@ -256,7 +257,7 @@
   background: #000;
   color: #fff;
   border: none;
-  border-radius: 25px;
+  border-radius: 23px;
   cursor: pointer;
   font-weight: bold;
   transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
