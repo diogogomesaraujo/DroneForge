@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Updated import for navigation
 import Sidebar from '../Sidebar/Sidebar';
 import { Check } from 'react-bootstrap-icons';
 import './DroneBuilder.css';
+import SuccessScreen from '../SuccessScreen/SuccessScreen';
 
 const DroneBuilder = () => {
   const [parts, setParts] = useState({
@@ -28,6 +30,10 @@ const DroneBuilder = () => {
   const [wordTransitioning, setWordTransitioning] = useState(false);
   const [partTransitioning, setPartTransitioning] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false); // New state variable for transition
+  const [isSuccess, setIsSuccess] = useState(false); // State for success screen
+
+  const navigate = useNavigate(); // Use this for navigation
 
   useEffect(() => {
     const fetchParts = async () => {
@@ -108,24 +114,28 @@ const DroneBuilder = () => {
 
   const nextStep = () => {
     if (currentStep < steps.length) {
+      setIsTransitioning(true);
       setWordTransitioning(true);
       setPartTransitioning(true);
       setTimeout(() => {
         setCurrentStep((prevStep) => prevStep + 1);
         setWordTransitioning(false);
         setPartTransitioning(false);
+        setIsTransitioning(false);
       }, 300);
     }
   };
 
   const prevStep = () => {
     if (currentStep > 1) {
+      setIsTransitioning(true);
       setWordTransitioning(true);
       setPartTransitioning(true);
       setTimeout(() => {
         setCurrentStep((prevStep) => prevStep - 1);
         setWordTransitioning(false);
         setPartTransitioning(false);
+        setIsTransitioning(false);
       }, 300);
     }
   };
@@ -182,17 +192,29 @@ const DroneBuilder = () => {
         }),
       });
   
-      const data = await response.json();
-  
-      if (!response.ok) {
+      if (response.ok) {
+        setIsSuccess(true); // Set success state to true if the drone is created successfully
+
+        // Redirect after a short delay
+        setTimeout(() => {
+          setIsSuccess(false); // Hide the success screen
+          navigate('/'); // Redirect to the desired route
+        }, 2300); // Show success screen for 6 seconds
+      } else {
+        const data = await response.json();
         throw new Error(data.message || "Something went wrong");
       }
   
-      console.log("Drone created:", data);
     } catch (error) {
       console.error("Error creating drone:", error);
     }
   };  
+
+  const progressPercentage = ((currentStep - 1) / (steps.length - 1)) * 100;
+
+  if (isSuccess) {
+    return <SuccessScreen />;
+  }
 
   return (
     <div className="dronebuilder-container">
@@ -213,8 +235,8 @@ const DroneBuilder = () => {
                 className={`part-item ${selectedParts[currentPartType]?.part?.name === part.name || selectedParts[currentPartType]?.name === part.name ? 'selected' : ''}`}
                 onClick={() => handlePartSelect(currentPartType, part)}
               >
-                <div className="image-placeholder"></div>
-                <p>{part.name}</p>
+                <img src={part.imageUrl} alt={part.name} className="part-image" />
+                <div className="title">{part.name}</div>
                 <p className="price">${part.price}</p>
                 {(selectedParts[currentPartType]?.part?.name === part.name || selectedParts[currentPartType]?.name === part.name) && (
                   <div className="check-icon">
@@ -243,10 +265,13 @@ const DroneBuilder = () => {
           <p>Total Price: <span className="price">${totalPrice}</span></p>
         </div>
         <div className="navigation-buttons centered">
-          {currentStep > 1 && <button className="button-common" onClick={prevStep}>Previous</button>}
-          {!isLastStep && <button className="button-common" onClick={nextStep}>Next</button>}
-          {isLastStep && <button className="button-common" onClick={handleConfirm}>Confirm</button>}
+          {currentStep > 1 && <button className="button-common" onClick={prevStep} disabled={isTransitioning}>Previous</button>}
+          {!isLastStep && <button className="button-common" onClick={nextStep} disabled={isTransitioning}>Next</button>}
+          {isLastStep && <button className="button-common button-confirm" onClick={handleConfirm}>Confirm</button>}
         </div>
+      </div>
+      <div className="progress-bar-container">
+        <div className="progress-bar" style={{ width: `${progressPercentage}%` }}></div>
       </div>
     </div>
   );

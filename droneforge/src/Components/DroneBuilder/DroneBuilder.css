@@ -135,11 +135,11 @@
 .part-item {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   width: 200px;
-  height: 250px;
+  height: 270px;
   border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -156,16 +156,21 @@
   transform: translateY(-5px);
 }
 
-.part-item .image-placeholder {
+.part-item img.part-image {
   width: 130px;
   height: 130px;
-  background: #f0f0f0;
+  object-fit: cover;
   border-radius: 50%;
   margin-bottom: 1rem;
+  opacity: 0.15;
+}
+
+.part-item.selected img.part-image {
+  opacity: 0.9;
 }
 
 .part-item p {
-  color: #ccc;
+  color: #ccc !important;
   margin: 0;
   font-size: 1.1rem;
 }
@@ -173,6 +178,22 @@
 .part-item.selected p,
 .part-item.selected .price {
   color: #333;
+}
+
+.part-item .title {
+  height: 2.4rem; /* Adjusted to fit 2 lines comfortably */
+  line-height: 1.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limits the title to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #ccc !important;
+  word-wrap: break-word;
+}
+
+.part-item.selected .title {
+  color: #333 !important;
 }
 
 .part-item.selected {
@@ -199,11 +220,13 @@
 .part-item .price {
   font-weight: bold;
   font-size: 1.2rem;
-  margin-top: 0.5rem;
   color: #ccc;
 }
 
-/* Quantity selector styles */
+.part-item.selected .price {
+  color: #333 !important;
+}
+
 .quantity-selector {
   margin-top: 1rem;
   text-align: center;
@@ -240,6 +263,10 @@
 .quantity-selector input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.quantity-selector input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 /* Navigation buttons */
@@ -303,20 +330,25 @@
 }
 
 /* Progress bar styles */
+/* Progress bar styles */
 .progress-bar-container {
   position: fixed;
   bottom: 0;
-  left: 250px;
-  width: calc(100% - 250px);
+  left: 0; /* Start from the left edge */
+  width: 100%; /* Use the full width of the viewport */
   height: 4px;
   background-color: #e0e0e0;
+  z-index: 0; /* Ensure it stays above other elements */
 }
 
 .progress-bar {
+  border-radius: 10px;
   height: 100%;
   width: 0;
   background-color: #333;
+  transition: width 0.6s ease; /* Smooth transition for width change */
 }
+
 
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {

@@ -107,6 +107,11 @@ body, button, input, textarea, .sidebar-header, .sidebar-footer, .sidebar-link, 
 .sidebar-content {
   flex: 1 1 auto;
   overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden;
+}
+
+.sidebar-content.collapsed {
+  overflow-x: hidden !important; /* Prevent horizontal scrolling in collapsed state */
 }
 
 .sidebar-link {
