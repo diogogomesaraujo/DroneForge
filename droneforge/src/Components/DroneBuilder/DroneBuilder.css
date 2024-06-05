@@ -382,3 +382,15 @@
     width: 100%;
   }
 }
+
+/* Confirm button styles */
+.button-confirm.enabled {
+  background-color: #8a2be2; /* Purple color when enabled */
+  color: #fff;
+}
+
+.button-confirm.disabled {
+  background-color: rgba(138, 43, 226, 0.3); /* Translucent purple when disabled */
+  color: rgba(255, 255, 255, 0.7);
+}
+

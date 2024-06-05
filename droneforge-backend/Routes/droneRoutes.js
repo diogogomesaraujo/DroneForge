@@ -12,4 +12,13 @@ router.post('/create', authMiddleware, droneController.createDrone);
 // Route to add a new part
 router.post('/parts', droneController.addPart);
 
+// Route to count drones
+router.get('/count', authMiddleware, droneController.countDrones);
+
+// Route to count drones by time intervals
+router.get('/count/intervals', authMiddleware, droneController.countDronesByTimeIntervals);
+
+// Route to get the most used part
+router.get('/most-used-part', authMiddleware, droneController.getMostUsedPart);
+
 module.exports = router;

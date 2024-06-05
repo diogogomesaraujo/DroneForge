@@ -9,7 +9,7 @@ const SuccessScreen = () => {
   useEffect(() => {
     const loadAnimation = async () => {
       try {
-        const response = await fetch('https://lottie.host/0fa8431b-b2a1-4724-aca9-ba550771661a/6TjAHBMW6t.json'); // Update the URL to your animation
+        const response = await fetch('https://lottie.host/d40cce1c-6257-4efb-84d7-c6b5e0959b5e/Fty28OJY4I.json'); // Update the URL to your animation
         const data = await response.json();
 
         if (animationInstance.current) {
@@ -24,12 +24,12 @@ const SuccessScreen = () => {
           animationData: data, // the animation data
         });
 
-        // Set a timeout to destroy the animation after a longer delay (e.g., 5 seconds)
+        // Set a timeout to destroy the animation after a longer delay (e.g., 2.3 seconds)
         setTimeout(() => {
           if (animationInstance.current) {
             animationInstance.current.destroy();
           }
-        }, 3000); // 5 seconds
+        }, 2300); // 2.3 seconds
 
       } catch (error) {
         console.error('Failed to load animation data:', error);

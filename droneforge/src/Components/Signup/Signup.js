@@ -73,7 +73,7 @@ function Signup() {
                 console.log('Registration successful');
                 setError('');
                 // Redirect to the main page
-                navigate('/main');
+                navigate('/login');
             } else {
                 // Handle errors from the server
                 const data = await response.json();

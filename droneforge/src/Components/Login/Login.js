@@ -68,7 +68,7 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        navigate('/sidebar'); // Update the navigate function call to go to the main page
+        navigate('/workspace'); // Update the navigate function call to go to the main page
       } else {
         setError('Invalid email or password');
       }
