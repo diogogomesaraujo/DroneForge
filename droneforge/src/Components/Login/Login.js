@@ -86,7 +86,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div className={`background-image ${fade}`} style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+      <div className={`signin-background-image ${fade}`} style={{ backgroundImage: `url(${backgroundImage})` }}></div>
       <Link to="/" className="site-name">droneforge.</Link>
       <div className="login-form-container">
         <div className="login-content">

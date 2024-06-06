@@ -21,14 +21,14 @@ html, body {
     justify-content: center;
     align-items: flex-start; /* Align to the top */
     height: 100vh;
-    background-color: #FAFAFA;
+    background-color: #fff;
     position: relative;
     overflow: hidden;
     flex-wrap: wrap; /* Allow wrapping */
     padding-top: calc(3vh + 50px); /* Adjust this value as needed */
 }
 
-.background-image {
+.signup-background-image {
     position: fixed;
     top: 50%;
     left: 50%;

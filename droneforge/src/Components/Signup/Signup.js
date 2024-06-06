@@ -87,7 +87,7 @@ function Signup() {
 
     return (
         <div className="signup-container">
-            <div className="background-image" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+            <div className="signup-background-image" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
             <Link to="/" className="site-name">droneforge.</Link>
             <div className="signup-form-container">
                 <div className="signup-content">

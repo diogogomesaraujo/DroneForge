@@ -79,7 +79,7 @@ html, body {
 
 /* Hero section */
 .custom-hero-section {
-  background: linear-gradient(to bottom, #ffffff, #f6f1ff);
+  background: #fff;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -142,7 +142,7 @@ html, body {
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1400px;
+  width: 1600px;
   opacity: 0.2;
   z-index: 0;
 }

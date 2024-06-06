@@ -16,7 +16,7 @@ html, body {
     overflow: hidden;
 }
 
-.background-image {
+.signin-background-image {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -45,7 +45,7 @@ html, body {
     justify-content: center;
     align-items: flex-start; /* Align to the top */
     height: 100vh;
-    background-color: #FAFAFA;
+    background-color: #fff;
     position: relative;
     overflow: hidden;
     flex-wrap: wrap; /* Allow wrapping */

@@ -3,7 +3,7 @@
   display: flex;
   height: 100vh;
   position: relative;
-  background: linear-gradient(to bottom, #ffffff, #f6f1ff); /* Gradient background */
+  background: #fff; /* Gradient background */
 }
 
 /* Background overlay */
