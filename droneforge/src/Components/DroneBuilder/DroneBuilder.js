@@ -154,6 +154,8 @@ const DroneBuilder = () => {
   const currentPartType = steps[currentStep - 1];
   const isLastStep = currentStep === steps.length;
 
+  const allPartsSelected = Object.values(selectedParts).every((part) => part && (part.part || part)); // Check if all parts are selected
+
   const handleConfirm = async () => {
     try {
       const parts = {
@@ -267,7 +269,7 @@ const DroneBuilder = () => {
         <div className="navigation-buttons centered">
           {currentStep > 1 && <button className="button-common" onClick={prevStep} disabled={isTransitioning}>Previous</button>}
           {!isLastStep && <button className="button-common" onClick={nextStep} disabled={isTransitioning}>Next</button>}
-          {isLastStep && <button className="button-common button-confirm" onClick={handleConfirm}>Confirm</button>}
+          {isLastStep && <button className="button-common button-confirm" onClick={handleConfirm} disabled={!allPartsSelected}>Confirm</button>}
         </div>
       </div>
       <div className="progress-bar-container">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import './Dashboard.css';
-import { jwtDecode } from 'jwt-decode';  // Correct import for jwtDecode
+import {jwtDecode} from 'jwt-decode';  // Correct import for jwtDecode
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Tools, GearFill, CartFill } from 'react-bootstrap-icons';  // Changed to a better icon for sales
 
@@ -25,8 +25,10 @@ const Dashboard = () => {
     const fetchUserName = () => {
       try {
         const token = localStorage.getItem('token');
-        const decodedToken = jwtDecode(token);
-        setUserName(decodedToken.name);
+        if (token) {
+          const decodedToken = jwtDecode(token);
+          setUserName(decodedToken.username);
+        }
       } catch (error) {
         console.error('Error fetching user name:', error);
       }

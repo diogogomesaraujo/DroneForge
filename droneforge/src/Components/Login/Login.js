@@ -17,6 +17,12 @@ function Login() {
   const animationInstance = useRef(null);
 
   useEffect(() => {
+    // Redirect to workspace dashboard if token exists
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/workspace/dashboard');
+    }
+
     const loadAnimation = async () => {
       try {
         const response = await fetch('https://lottie.host/e6f0719e-2a73-425e-bb2a-060e348b2ebb/l3tqaZFSSh.json');
@@ -46,7 +52,7 @@ function Login() {
         animationInstance.current.destroy();
       }
     };
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, [navigate]); // Empty dependency array ensures this effect runs only once
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -68,7 +74,7 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        navigate('/workspace/drone-builder'); // Update the navigate function call to go to the main page
+        navigate('/workspace/dashboard'); // Update the navigate function call to go to the main page
       } else {
         setError('Invalid email or password');
       }

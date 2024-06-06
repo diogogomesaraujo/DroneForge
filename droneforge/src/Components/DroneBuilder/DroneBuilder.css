@@ -72,7 +72,7 @@
   background: linear-gradient(to right, #bdaaff, #a184f8); /* Gradient from purple to a lighter purple */
   -webkit-background-clip: text; /* For Safari */
   -webkit-text-fill-color: transparent; /* For Safari */
-  color: #8a2be2; /* Fallback for other browsers */
+  color: #a184f8; /* Fallback for other browsers */
   text-shadow: 0 0 20px rgba(138, 43, 226, 0.1); /* Purple glow */
 }
 
@@ -197,7 +197,7 @@
 }
 
 .part-item.selected {
-  border: 2px solid #8a2be2; /* Purple border */
+  border: 2px solid #a184f8; /* Purple border */
   box-shadow: 0 0 15px rgba(138, 43, 226, 0.1); /* Purple glow */
   background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white background for better contrast */
 }
@@ -208,7 +208,7 @@
   right: 10px;
   font-size: 1rem;
   color: #fff;
-  background: #8a2be2;
+  background: #a184f8;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -255,7 +255,7 @@
 }
 
 .quantity-selector input:focus {
-  border-color: #8a2be2; /* Keep border color purple on focus */
+  border-color: #a184f8; /* Keep border color purple on focus */
   box-shadow: 0 0 8px rgba(138, 43, 226, 0.2); /* Optional: Add a purple glow effect when focused */
 }
 
@@ -296,6 +296,20 @@
   background: #333;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-3px);
+}
+
+/* Confirm button styles */
+.button-confirm {
+  background: #a184f8; /* Purple background for the confirm button */
+}
+
+.button-confirm:hover {
+  background: #b69dfb; /* Lighter purple background on hover */
+}
+
+.button-confirm:disabled {
+  opacity: 0.5; /* Reduced opacity when disabled */
+  cursor: not-allowed; /* Change cursor to indicate non-clickable state */
 }
 
 /* Bottom bar container styles */
