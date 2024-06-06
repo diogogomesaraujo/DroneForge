@@ -69,7 +69,7 @@
 }
 
 .word-text {
-  background: linear-gradient(to right, #8a2be2, #a184f8); /* Gradient from purple to a lighter purple */
+  background: linear-gradient(to right, #bdaaff, #a184f8); /* Gradient from purple to a lighter purple */
   -webkit-background-clip: text; /* For Safari */
   -webkit-text-fill-color: transparent; /* For Safari */
   color: #8a2be2; /* Fallback for other browsers */
@@ -382,15 +382,3 @@
     width: 100%;
   }
 }
-
-/* Confirm button styles */
-.button-confirm.enabled {
-  background-color: #8a2be2; /* Purple color when enabled */
-  color: #fff;
-}
-
-.button-confirm.disabled {
-  background-color: rgba(138, 43, 226, 0.3); /* Translucent purple when disabled */
-  color: rgba(255, 255, 255, 0.7);
-}
-

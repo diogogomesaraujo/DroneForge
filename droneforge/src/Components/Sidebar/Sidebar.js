@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Nav, Button } from 'react-bootstrap';
 import { ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons';
+import { NavLink } from 'react-router-dom'; // Import NavLink from react-router-dom
 import { jwtDecode } from 'jwt-decode'; // Correct named import
-import './Sidebar.css'; // Custom CSS for styling
-import userAvatar from '../../assets/Avatars/purple.png'; // Import the image
+import './Sidebar.css'; // Custom CSS for styling specific to Sidebar
+import userAvatar from '../../assets/Avatars/pastel-blue.png'; // Import the image
 
 const Sidebar = () => {
-  const [activeLink, setActiveLink] = useState('dashboard');
-  const [activeFooterLink, setActiveFooterLink] = useState(null);
-  const [collapsed, setCollapsed] = useState(false);
+  // Read the initial state from localStorage or default to false
+  const [collapsed, setCollapsed] = useState(() => {
+    const savedState = localStorage.getItem('sidebarCollapsed');
+    return savedState === 'true'; // Convert to boolean
+  });
   const [clicked, setClicked] = useState(false); // State to track if the button is clicked
   const [userInfo, setUserInfo] = useState({ name: '', username: '' });
 
@@ -25,18 +28,10 @@ const Sidebar = () => {
     }
   }, []);
 
-  const handleNavClick = (link) => {
-    setActiveLink(link);
-    setActiveFooterLink(null); // Reset footer link active state
-  };
-
-  const handleFooterNavClick = (link) => {
-    setActiveFooterLink(link);
-    setActiveLink(null); // Reset main link active state
-  };
-
   const toggleSidebar = () => {
-    setCollapsed(!collapsed);
+    const newCollapsedState = !collapsed;
+    setCollapsed(newCollapsedState);
+    localStorage.setItem('sidebarCollapsed', newCollapsedState); // Save the state to localStorage
     setClicked(true); // Set clicked state to true when button is clicked
     setTimeout(() => setClicked(false), 300); // Reset clicked state after 300ms
   };
@@ -51,7 +46,7 @@ const Sidebar = () => {
             </div>
             {!collapsed && (
               <div className="user-details ms-2">
-                <p className="m-0">{userInfo.name}</p>
+                <p className="m-0">Workspace</p>
                 <small>@{userInfo.username}</small>
               </div>
             )}
@@ -59,74 +54,59 @@ const Sidebar = () => {
         </div>
         <div className="sidebar-content">
           <Nav className="flex-column">
-            <Nav.Link 
-              href="#dashboard" 
-              className={`sidebar-link ${activeLink === 'dashboard' ? 'active' : ''}`} 
-              onClick={() => handleNavClick('dashboard')}
+            <NavLink 
+              to="/workspace/dashboard" 
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
             >
-              <span className={`icon ${activeLink === 'dashboard' ? 'active-icon' : ''}`}>🏠</span> 
+              <span className="icon">🏠</span> 
               <span className="link-text">Dashboard</span>
               {collapsed && <span className="tooltip">Dashboard</span>}
-            </Nav.Link>
-            <Nav.Link 
-              href="#drone-builder" 
-              className={`sidebar-link ${activeLink === 'drone-builder' ? 'active' : ''}`} 
-              onClick={() => handleNavClick('drone-builder')}
+            </NavLink>
+            <NavLink 
+              to="/workspace/drone-builder" 
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
             >
-              <span className={`icon ${activeLink === 'drone-builder' ? 'active-icon' : ''}`}>🛠️</span> 
+              <span className="icon">🛠️</span> 
               <span className="link-text">Drone Builder</span>
               {collapsed && <span className="tooltip">Drone Builder</span>}
-            </Nav.Link>
-            <Nav.Link 
-              href="#saved" 
-              className={`sidebar-link ${activeLink === 'saved' ? 'active' : ''}`} 
-              onClick={() => handleNavClick('saved')}
+            </NavLink>
+            <NavLink 
+              to="/workspace/saved" 
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
             >
-              <span className={`icon ${activeLink === 'saved' ? 'active-icon' : ''}`}>💾</span> 
+              <span className="icon">💾</span> 
               <span className="link-text">Saved</span>
               {collapsed && <span className="tooltip">Saved</span>}
-            </Nav.Link>
-            <Nav.Link 
-              href="#explore" 
-              className={`sidebar-link ${activeLink === 'explore' ? 'active' : ''}`} 
-              onClick={() => handleNavClick('explore')}
+            </NavLink>
+            <NavLink 
+              to="/workspace/explore" 
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
             >
-              <span className={`icon ${activeLink === 'explore' ? 'active-icon' : ''}`}>🔍</span> 
+              <span className="icon">🔍</span> 
               <span className="link-text">Explore</span>
               {collapsed && <span className="tooltip">Explore</span>}
-            </Nav.Link>
-            <Nav.Link 
-              href="#statistics" 
-              className={`sidebar-link ${activeLink === 'statistics' ? 'active' : ''}`} 
-              onClick={() => handleNavClick('statistics')}
+            </NavLink>
+            <NavLink 
+              to="/workspace/edit-profile" 
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
             >
-              <span className={`icon ${activeLink === 'statistics' ? 'active-icon' : ''}`}>📊</span> 
-              <span className="link-text">Statistics</span>
-              {collapsed && <span className="tooltip">Statistics</span>}
-            </Nav.Link>
-            <Nav.Link 
-              href="#edit-profile" 
-              className={`sidebar-link ${activeFooterLink === 'edit-profile' ? 'active' : ''}`}
-              onClick={() => handleFooterNavClick('edit-profile')}
-            >
-              <span className={`icon ${activeFooterLink === 'edit-profile' ? 'active-icon' : ''}`}>✏️</span> 
+              <span className="icon">✏️</span> 
               <span className="link-text">Edit Profile</span>
               {collapsed && <span className="tooltip">Edit Profile</span>}
-            </Nav.Link>
-            <Nav.Link 
-              href="#settings" 
-              className={`sidebar-link ${activeFooterLink === 'settings' ? 'active' : ''}`}
-              onClick={() => handleFooterNavClick('settings')}
+            </NavLink>
+            <NavLink 
+              to="/workspace/settings" 
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
             >
-              <span className={`icon ${activeFooterLink === 'settings' ? 'active-icon' : ''}`}>⚙️</span> 
+              <span className="icon">⚙️</span> 
               <span className="link-text">Settings</span>
               {collapsed && <span className="tooltip">Settings</span>}
-            </Nav.Link>
+            </NavLink>
           </Nav>
         </div>
         {!collapsed && (
           <div className="sidebar-footer">
-            <p>droneforge.</p>
+            <NavLink to="/" className="sidebar-footer-link">droneforge.</NavLink>
           </div>
         )}
       </div>

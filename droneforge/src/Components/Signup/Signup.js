@@ -73,7 +73,7 @@ function Signup() {
                 console.log('Registration successful');
                 setError('');
                 // Redirect to the main page
-                navigate('/login');
+                navigate('/main');
             } else {
                 // Handle errors from the server
                 const data = await response.json();
@@ -88,7 +88,7 @@ function Signup() {
     return (
         <div className="signup-container">
             <div className="background-image" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
-            <div className="site-name">droneforge.</div>
+            <Link to="/" className="site-name">droneforge.</Link>
             <div className="signup-form-container">
                 <div className="signup-content">
                     <h2 className="signup-title">Join us! 🚀</h2>

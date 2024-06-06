@@ -1,4 +1,4 @@
-/* Common CSS */
+/* SidebarStyles.css */
 body, button, input, textarea, .sidebar-header, .sidebar-footer, .sidebar-link, .user-details {
   font-family: 'Poppins', sans-serif;
 }
@@ -127,18 +127,18 @@ body, button, input, textarea, .sidebar-header, .sidebar-footer, .sidebar-link, 
 }
 
 .sidebar-link:hover {
-  color: #333; /* Dark grey color on hover */
+  color: #666; /* Pastel purple color on hover */
 }
 
 .sidebar-link.active {
-  background-color: rgba(138, 43, 226, 0.1); /* Very light purple background */
+  background-color: rgba(155, 114, 236, 0.1); /* Light pastel purple background */
   font-weight: bold; /* Bold text */
-  color: #8a2be2; /* Purple color when active */
+  color: #9b72ec; /* Pastel purple color when active */
 }
 
 .sidebar-footer-link.active {
   font-weight: bold; /* Bold text */
-  color: #333; /* Dark grey color when active */
+  color: #9b72ec; /* Pastel purple color when active */
 }
 
 .sidebar-link .icon {
@@ -146,7 +146,7 @@ body, button, input, textarea, .sidebar-header, .sidebar-footer, .sidebar-link, 
 }
 
 .sidebar-link .icon.active-icon {
-  color: #8a2be2; /* Dark purple for active icon */
+  color: #9b72ec; /* Pastel purple for active icon */
 }
 
 .sidebar-container.collapsed .link-text {
@@ -212,12 +212,12 @@ body, button, input, textarea, .sidebar-header, .sidebar-footer, .sidebar-link, 
 
 .floating-collapse-btn:hover {
   background-color: #fff; /* Maintain white background */
-  color: #333; /* Maintain dark grey color */
+  color: #9b72ec; /* Pastel purple color */
 }
 
 .floating-collapse-btn:active,
 .floating-collapse-btn.clicked {
-  color: #8a2be2 !important; /* Purple color on active and clicked */
+  color: #9b72ec !important; /* Pastel purple color on active and clicked */
   background-color: #fff !important;
 }
 
@@ -229,9 +229,18 @@ body, button, input, textarea, .sidebar-header, .sidebar-footer, .sidebar-link, 
   padding: 1rem 0;
 }
 
-.sidebar-footer p {
+.sidebar-footer-link {
   margin: 0;
   font-size: 1.25rem;
   font-weight: bold;
-  color: #8a2be2;
+  color: #9b72ec; /* More vivid yet pastel purple */
+  text-decoration: none; /* Ensure there is no underline */
+}
+
+.sidebar-footer-link:hover,
+.sidebar-footer-link:focus,
+.sidebar-footer-link:active,
+.sidebar-footer-link:visited {
+  color: #9b72ec; /* Ensure the color stays consistent */
+  text-decoration: none; /* Ensure there is no underline */
 }

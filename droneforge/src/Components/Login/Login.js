@@ -68,7 +68,7 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        navigate('/workspace'); // Update the navigate function call to go to the main page
+        navigate('/workspace/drone-builder'); // Update the navigate function call to go to the main page
       } else {
         setError('Invalid email or password');
       }
@@ -87,7 +87,7 @@ function Login() {
   return (
     <div className="login-container">
       <div className={`background-image ${fade}`} style={{ backgroundImage: `url(${backgroundImage})` }}></div>
-      <div className="site-name">droneforge.</div>
+      <Link to="/" className="site-name">droneforge.</Link>
       <div className="login-form-container">
         <div className="login-content">
           <h2 className="login-title">Welcome back! 👋</h2>

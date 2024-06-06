@@ -1,157 +1,156 @@
 /* Common CSS */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body, button, input, textarea, .custom-hero-title, .custom-hero-subtitle, .custom-hero-text, .custom-forgot-password, .custom-signup-link, .custom-site-name {
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background: #ffffff;
-  }
-  
-  /* Navbar CSS */
-  .custom-navbar {
-    padding: 1rem 2rem;
-    border-bottom: none;
-    z-index: 10;
-    background: transparent;
-  }
-  
-  .custom-navbar-brand {
-    color: #8a2be2;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-right: 2rem;
-    transition: color 0.3s;
-  }
-  
-  .custom-navbar-brand:hover {
-    color: #8a2be2;
-  }
-  
-  .custom-nav-links {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-  }
-  
-  .custom-nav-link {
-    color: #888;
-    margin-right: 1.5rem;
-    transition: color 0.3s, transform 0.3s;
-    font-weight: 500;
-  }
-  
-  .custom-nav-link:hover {
-    color: #333;
-    transform: translateY(-2px);
-  }
-  
-  .custom-btn-signup {
-    background-color: #222;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    padding: 0.6rem 1.5rem;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .custom-btn-signup:hover {
-    background-color: #333;
-    transform: translateY(-2px);
-  }
-  
-  .custom-btn-signup:focus,
-  .custom-btn-signup:active {
-    background-color: #8a2be2 !important;
-    box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25) !important;
-    outline: none !important;
-  }
-  
-  /* Hero section */
-  .custom-hero-section {
-    background: linear-gradient(to bottom, #ffffff, #e6d4ff);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    padding: 0 1rem;
-    margin-top: -1rem;
-  }
-  
-  .custom-hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-    z-index: 1;
-  }
-  
-  .custom-hero-title {
-    font-size: 4rem; /* Adjusted font size for better scaling */
-    margin-bottom: 1rem;
-    font-weight: bold;
-    color: #222;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-  
-  .custom-hero-subtitle {
-    font-size: 1.14rem; /* Adjusted font size for better scaling */
-    margin-bottom: 1.5rem; /* Reduced margin for better spacing */
-    color: #888;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-  
-  .custom-hero-button {
-    background-color: #8a2be2;
-    border: none;
-    border-radius: 1.9rem;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    font-weight: bold;
-    font-size: 16px; /* Adjusted font size for better scaling */
-    padding: 1rem 2rem; /* Adjusted padding for better scaling */
-    color: #fff;
-    box-shadow: 0 4px 14px rgba(138, 43, 226, 0.4);
-  }
-  
-  .custom-hero-button:hover {
-    background-color: #6a1bb5;
-    transform: translateY(-2px);
-  }
-  
-  .custom-hero-button:active {
-    background-color: #6a1bb5 !important;
-    transform: scale(1.05);
-  }
-  
-  .drone-image {
-    position: fixed;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1600px;
-    opacity: 0.2;
-    z-index: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-  
-  /* Gradient text for creativity */
-  .gradient-text {
-    background: linear-gradient(to right, #8a2be2, #a184f8);
-    -webkit-background-clip: text;
-    text-shadow: 0 4px 14px rgba(138, 43, 226, 0.2);
-    color: transparent;
-    font-weight: bold;
-  }
+
+body, button, input, textarea, .custom-hero-title, .custom-hero-subtitle, .custom-hero-text, .custom-forgot-password, .custom-signup-link, .custom-site-name {
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #ffffff;
+}
+
+/* Navbar CSS */
+.custom-navbar {
+  padding: 1rem 2rem;
+  border-bottom: none;
+  z-index: 10;
+  background: transparent;
+}
+
+.custom-navbar-brand {
+  color: #9b72ec; /* Pastel purple */
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-right: 2rem;
+  transition: color 0.3s;
+}
+
+.custom-navbar-brand:hover {
+  color: #9b72ec; /* Pastel purple */
+}
+
+.custom-nav-links {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.custom-nav-link {
+  color: #888;
+  margin-right: 1.5rem;
+  transition: color 0.3s, transform 0.3s;
+  font-weight: 500;
+}
+
+.custom-nav-link:hover {
+  color: #333;
+  transform: translateY(-2px);
+}
+
+.custom-btn-signup {
+  background-color: #000; /* Black */
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.6rem 1.5rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.custom-btn-signup:hover {
+  background-color: #333; /* Darker black */
+  transform: translateY(-2px);
+}
+
+.custom-btn-signup:focus,
+.custom-btn-signup:active {
+  background-color: #333 !important;
+  box-shadow: 0 0 0 0.2rem rgba(51, 51, 51, 0.25) !important;
+  outline: none !important;
+}
+
+/* Hero section */
+.custom-hero-section {
+  background: linear-gradient(to bottom, #ffffff, #f6f1ff);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 1rem;
+  margin-top: -1rem;
+}
+
+.custom-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.custom-hero-title {
+  font-size: 4rem; /* Adjusted font size for better scaling */
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #222;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.custom-hero-subtitle {
+  font-size: 1.14rem; /* Adjusted font size for better scaling */
+  margin-bottom: 1.5rem; /* Reduced margin for better spacing */
+  color: #888;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.custom-hero-button {
+  background-color: #bdaaff; /* Pastel purple */
+  border: none;
+  border-radius: 1.9rem;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  font-weight: bold;
+  font-size: 16px; /* Adjusted font size for better scaling */
+  padding: 1rem 2rem; /* Adjusted padding for better scaling */
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(138, 43, 226, 0.4);
+}
+
+.custom-hero-button:hover {
+  background-color: #a184f8; /* Darker pastel purple */
+  transform: translateY(-2px);
+}
+
+.custom-hero-button:active {
+  background-color: #8a2be2 !important;
+  transform: scale(1.05);
+}
+
+.drone-image {
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1400px;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+/* Gradient text for creativity */
+.gradient-text {
+  background: linear-gradient(to right, #bdaaff, #a184f8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}

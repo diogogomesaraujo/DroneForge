@@ -98,7 +98,7 @@ html, body {
 }
 
 .form-control:focus {
-    border-color: #8a2be2;
+    border-color: #9b72ec;
     box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25);
 }
 
@@ -143,13 +143,13 @@ html, body {
 
 .login-button:focus,
 .login-button:active {
-    background-color: #8a2be2;
+    background-color: #9b72ec;
     box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.25);
     outline: none;
 }
 
 .login-button:focus:not(:focus-visible) {
-    background-color: #8a2be2;
+    background-color: #9b72ec;
 }
 
 .signup-link {
@@ -174,9 +174,14 @@ html, body {
     left: 4rem;
     font-size: 23px;
     font-weight: 600;
-    color: #8a2be2;
+    color: #9b72ec;
     z-index: 10;
     transition: left 0.3s ease, transform 0.3s ease;
+    text-decoration: none; /* Remove the underline */
+}
+
+.site-name :hover{
+    text-decoration: none; /* Remove the underline */
 }
 
 @media (max-width: 600px) {
