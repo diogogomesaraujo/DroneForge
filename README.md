@@ -122,6 +122,6 @@ All thanks to these two bozos:
   </tr>
 </table>
 
-## 📝 Licença
+## 📝 License
 
 This project is under license. Check the file [License](LICENSE.md) for more details.
