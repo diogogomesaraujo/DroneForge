@@ -104,7 +104,7 @@ All thanks to these two bozos:
 <table>
   <tr>
     <td align="center">
-      <a href="#" title="defina o titulo do link">
+      <a href="https://github.com/diogogomesaraujo" title="defina o titulo do link">
         <img src="https://avatars.githubusercontent.com/u/118282799?v=4" width="100px;" alt="Photo of Diogo Araújo"/><br>
         <sub>
           <b>Diogo Araújo</b>
@@ -112,7 +112,7 @@ All thanks to these two bozos:
       </a>
     </td>
     <td align="center">
-      <a href="#" title="defina o titulo do link">
+      <a href="https://github.com/DiogoRodriguesz" title="defina o titulo do link">
         <img src="https://avatars.githubusercontent.com/u/120279892?v=4" width="100px;" alt="Photo of Diogo Rodrigues"/><br>
         <sub>
           <b>Diogo Rodrigues</b>
